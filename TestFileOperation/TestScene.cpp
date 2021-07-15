@@ -315,8 +315,11 @@ void TestScene::DrawTest02(int no)
 		{
 			// ここからコーディングしていこう
 			//------------------------------------------
+			while (getline(ifs, line))
+			{
+				mMessage = line;
+			}
 			
-			//mMessage = ifs;
 			//------------------------------------------
 
 			ifs.close();
@@ -348,23 +351,26 @@ void TestScene::DrawTest03(int no)
 		std::string line;
 		if (ifs)
 		{
-			mMessages.clear();
+			while (getline(ifs, line))
+			{
+				mMessages.clear();
 
-			// ここからコーディングしていこう
-			//------------------------------------------
+				// ここからコーディングしていこう
+				//------------------------------------------
 
-			// Hint:カンマ区切りは、Utility::Splitを使用
-			std::vector<std::string>strvec =
-				AsoUtility::Split(line, ',');
+				// Hint:カンマ区切りは、Utility::Splitを使用
+				std::vector<std::string>strvec =
+					AsoUtility::Split(line,',');
 
-			mMessages[0] = strvec[0];
-			/*mMessages[1] = stoi(strvec[1]);
-			mMessages[2] = stoi(strvec[2]);
-			mMessages[3] = stoi(strvec[3]);*/
+				
+				int size = strvec.size();
+				/*for (int i = 0; i < size; i++)
+				{
+					mMessages[i] = stoi(strvec[i]);
+				}*/
 
-
-			//------------------------------------------
-
+				//------------------------------------------
+			}
 			ifs.close();
 		}
 		//------------------------------------------
@@ -417,15 +423,19 @@ void TestScene::DrawTest04(int no)
 
 			// ここからコーディングしていこう
 			//------------------------------------------
+			while (getline(ifs, line))
+			{
+				// Hint:カンマ区切りは、Utility::Splitを使用
+				std::vector<std::string>strvec =
+					AsoUtility::Split(line, ',');
 
-			// Hint:カンマ区切りは、Utility::Splitを使用
-			std::vector<std::string>strvec =
-				AsoUtility::Split(line, ',');
+				int mID = stoi(strvec[0]);
+				std::string mMes = strvec[1];
 
-			//mMsgMap.emplace(stoi(strvec[0]), strvec[1]);
+				mMsgMap.emplace(mID, mMes);
 
-			//------------------------------------------
-
+				//------------------------------------------
+			}
 			ifs.close();
 		}
 		//------------------------------------------
